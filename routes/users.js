@@ -276,7 +276,7 @@ router.get("/checkmail/:splid/:emailid", cors(), async (req, res) => {
     await mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
     let user = await userdata.findOne({ email: { $eq: req.params.emailid } })
     if (user.resetid === req.params.splid) {
-res.redirect("https://heuristic-bardeen-9b8469.netlify.app/")
+res.redirect("https://reseturl.netlify.app/")
      
     }
     else {
