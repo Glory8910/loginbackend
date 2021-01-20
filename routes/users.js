@@ -98,9 +98,9 @@ async function sendMail(a) {
 const uri = `mongodb+srv://seeli:${key}@user.mcvkn.mongodb.net/user?retryWrites=true&w=majority`
 
 
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/', function (req, res, next) {
+//   res.send('respond with a resource');
+// });
 
 // var corsOptions = {
 //   origin: 'null' || "http://169.254.254.71",
