@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
-var mongodb = require('mongodb')
 var mongoose = require('mongoose')
-var cors = require('cors');
 var bodyparser = require('body-parser')
 const nodemailer = require("nodemailer");
 const { google } = require('googleapis')
@@ -100,21 +98,20 @@ async function sendMail(a) {
 const uri = `mongodb+srv://seeli:${key}@user.mcvkn.mongodb.net/user?retryWrites=true&w=majority`
 
 
-router.use(cors())
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-var corsOptions = {
-  origin: 'null' || "http://169.254.254.71",
-  methods:"POST GET",
-  optionsSuccessStatus: 200 || 204
-}
+// var corsOptions = {
+//   origin: 'null' || "http://169.254.254.71",
+//   methods:"POST GET",
+//   optionsSuccessStatus: 200 || 204
+// }
 
 
-router.options('*', cors(corsOptions))
 
-router.post('/reg', cors(), async function (req, res, next) {
+
+router.post('/reg', async function (req, res, next) {
 
   try {
     await mongoose.connect(uri, { useNewUrlParser: true }, { useUnifiedTopology: true });
@@ -147,8 +144,7 @@ router.post('/reg', cors(), async function (req, res, next) {
 
 
 
-router.options('/login', cors(corsOptions))
-router.post("/login", cors(), async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
@@ -192,7 +188,7 @@ router.post("/login", cors(), async (req, res) => {
 
 
 
-router.post("/resetpassword", cors(), async (req, res) => {
+router.post("/resetpassword", async (req, res) => {
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
@@ -238,7 +234,7 @@ router.post("/resetpassword", cors(), async (req, res) => {
 
 
 
-router.post("/reset", cors(), async (req, res) => {
+router.post("/reset",async (req, res) => {
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 
@@ -271,7 +267,7 @@ router.post("/reset", cors(), async (req, res) => {
 
 
 
-router.get("/checkmail/:splid/:emailid", cors(), async (req, res) => {
+router.get("/checkmail/:splid/:emailid",async (req, res) => {
   try {
     await mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
     let user = await userdata.findOne({ email: { $eq: req.params.emailid } })
@@ -317,7 +313,7 @@ function authenticate(req, res, next) {
 
 
 
-router.get("/mainurlpage",cors(), authenticate, (req, res) => {
+router.get("/mainurlpage", authenticate, (req, res) => {
 
   console.log("hi")
 
